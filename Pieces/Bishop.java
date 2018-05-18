@@ -14,12 +14,37 @@ public class Bishop extends GamePiece {
     }
 
     public ArrayList<int[]> getPossibleMoves() {
-        //make an ArrayList for spotsToLook
-        //for loops, loop over each diagonal, have 4 loops
-        //add each spot into the spotsToLook
         possibleMoves = new ArrayList<>();
-        int[][] spotsToLook = {{row - 1, column - 1}, {row - 1, column + 1}, {row + 1, column - 1},
-                {row + 1, column + 1}};
+        ArrayList<int[]> spotsToLook = new ArrayList<>();
+        int irow = row;
+        int icolumn = column;
+        while(Chess.chessBoard[irow + 1][icolumn + 1] < 8 && Chess.chessBoard[irow + 1][icolumn + 1] < 8){
+            irow++;
+            icolumn++;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        irow = row;
+        icolumn = column;
+        while(Chess.chessBoard[irow - 1][icolumn - 1] < 8 && Chess.chessBoard[irow - 1][icolumn - 1] < 8){
+            irow--;
+            icolumn--;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        irow = row;
+        icolumn = column;
+        while(Chess.chessBoard[irow + 1][icolumn - 1] < 8 && Chess.chessBoard[irow + 1][icolumn - 1] < 8){
+            irow++;
+            icolumn--;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        irow = row;
+        icolumn = column;
+        while(Chess.chessBoard[irow - 1][icolumn + 1] < 8 && Chess.chessBoard[irow - 1][icolumn + 1] < 8){
+            irow--;
+            icolumn++;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+
         int row;
         int column;
         for(int[] coordinate: spotsToLook){

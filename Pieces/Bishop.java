@@ -18,28 +18,28 @@ public class Bishop extends GamePiece {
         ArrayList<int[]> spotsToLook = new ArrayList<>();
         int irow = row;
         int icolumn = column;
-        while(Chess.chessBoard[irow + 1][icolumn + 1] < 8 && Chess.chessBoard[irow + 1][icolumn + 1] < 8){
+        while(irow < 8 && icolumn < 8){
             irow++;
             icolumn++;
             spotsToLook.add(new int[]{irow, icolumn});
         }
         irow = row;
         icolumn = column;
-        while(Chess.chessBoard[irow - 1][icolumn - 1] < 8 && Chess.chessBoard[irow - 1][icolumn - 1] < 8){
+        while(irow > 0 && icolumn > 0){
             irow--;
             icolumn--;
             spotsToLook.add(new int[]{irow, icolumn});
         }
         irow = row;
         icolumn = column;
-        while(Chess.chessBoard[irow + 1][icolumn - 1] < 8 && Chess.chessBoard[irow + 1][icolumn - 1] < 8){
+        while(irow < 8 && icolumn > 0){
             irow++;
             icolumn--;
             spotsToLook.add(new int[]{irow, icolumn});
         }
         irow = row;
         icolumn = column;
-        while(Chess.chessBoard[irow - 1][icolumn + 1] < 8 && Chess.chessBoard[irow - 1][icolumn + 1] < 8){
+        while(irow > 0 && icolumn < 8){
             irow--;
             icolumn++;
             spotsToLook.add(new int[]{irow, icolumn});

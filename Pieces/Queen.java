@@ -33,12 +33,46 @@ public class Queen extends GamePiece {
         //Gets all of the row and column moves
         ArrayList<int[]> rowMoves = findMovesInRow();
         ArrayList<int[]> colMoves = findMovesInCol();
+        ArrayList<int[]> diagonalMoves = findDiagonalMoves();
 
         //Adds all of the moves to possible moves
         possibleMoves.addAll(rowMoves);
         possibleMoves.addAll(colMoves);
+        possibleMoves.addAll(diagonalMoves);
 
         return possibleMoves;
+    }
+    private ArrayList<int[]> findDiagonalMoves() {
+        ArrayList<int[]> moves = new ArrayList<>();
+        int irow = row;
+        int icolumn = column;
+        while (irow < 8 && icolumn < 8) {
+            irow++;
+            icolumn++;
+            moves.add(new int[]{irow, icolumn});
+        }
+        irow = row;
+        icolumn = column;
+        while (irow > 0 && icolumn > 0) {
+            irow--;
+            icolumn--;
+            moves.add(new int[]{irow, icolumn});
+        }
+        irow = row;
+        icolumn = column;
+        while (irow < 8 && icolumn > 0) {
+            irow++;
+            icolumn--;
+            moves.add(new int[]{irow, icolumn});
+        }
+        irow = row;
+        icolumn = column;
+        while (irow > 0 && icolumn < 8) {
+            irow--;
+            icolumn++;
+            moves.add(new int[]{irow, icolumn});
+        }
+        return moves;
     }
 
 

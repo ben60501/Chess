@@ -15,38 +15,11 @@ public class Bishop extends GamePiece {
 
     public ArrayList<int[]> getPossibleMoves() {
         possibleMoves = new ArrayList<>();
-        ArrayList<int[]> spotsToLook = new ArrayList<>();
-        int irow = row;
-        int icolumn = column;
-        while(irow < 8 && icolumn < 8){
-            irow++;
-            icolumn++;
-            spotsToLook.add(new int[]{irow, icolumn});
-        }
-        irow = row;
-        icolumn = column;
-        while(irow > 0 && icolumn > 0){
-            irow--;
-            icolumn--;
-            spotsToLook.add(new int[]{irow, icolumn});
-        }
-        irow = row;
-        icolumn = column;
-        while(irow < 8 && icolumn > 0){
-            irow++;
-            icolumn--;
-            spotsToLook.add(new int[]{irow, icolumn});
-        }
-        irow = row;
-        icolumn = column;
-        while(irow > 0 && icolumn < 8){
-            irow--;
-            icolumn++;
-            spotsToLook.add(new int[]{irow, icolumn});
-        }
-
+        ArrayList<int[]> spotsToLook = spotsToLook();
+        possibleMoves.addAll(spotsToLook);
         int row;
         int column;
+        // looks through all the spots and adds spots the piece can move to the arrayList
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];
@@ -61,5 +34,42 @@ public class Bishop extends GamePiece {
             }
         }
         return possibleMoves;
+    }
+    private ArrayList<int[]> spotsToLook(){
+        ArrayList<int[]> spotsToLook = new ArrayList<>(); // arrayList for all the spots to look at
+        int irow = row;       // the row that the spot is in
+        int icolumn = column; // the column that the spot is in
+
+        // bottom right diagonal
+        while(irow < 8 && icolumn < 8){
+            irow++;
+            icolumn++;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        // top left diagonal
+        irow = row;
+        icolumn = column;
+        while(irow > 0 && icolumn > 0){
+            irow--;
+            icolumn--;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        // bottom left diagonal
+        irow = row;
+        icolumn = column;
+        while(irow < 8 && icolumn > 0){
+            irow++;
+            icolumn--;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        // top right diagonal
+        irow = row;
+        icolumn = column;
+        while(irow > 0 && icolumn < 8){
+            irow--;
+            icolumn++;
+            spotsToLook.add(new int[]{irow, icolumn});
+        }
+        return spotsToLook;
     }
 }

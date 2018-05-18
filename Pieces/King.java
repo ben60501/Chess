@@ -27,8 +27,10 @@ public class King extends GamePiece {
                 {row + 1, column - 1}, // top three
                 {row + 1, column},
                 {row + 1, column + 1}};
+
         int row;
         int column;
+        // looks through all the spots and adds spots the piece can move to the arrayList
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];

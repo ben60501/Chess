@@ -42,6 +42,8 @@ public class Queen extends GamePiece {
 
         return possibleMoves;
     }
+
+
     private ArrayList<int[]> findDiagonalMoves() {
         ArrayList<int[]> moves = new ArrayList<>();
         int irow = row;
@@ -112,13 +114,4 @@ public class Queen extends GamePiece {
 
         return moves;
     }
-
-    private ArrayList<int[]> findPosDiagonalMoves() {
-        return new ArrayList<>();
-    }
-
-    private ArrayList<int[]> findNegDiagonalMoves() {
-        return new ArrayList<>();
-    }
-
 }

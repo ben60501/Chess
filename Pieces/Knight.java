@@ -27,8 +27,10 @@ public class Knight extends GamePiece {
                 {row - 1, column + 2},
                 {row + 1, column - 2}, // left
                 {row - 1, column - 2}};
+
         int row;
         int column;
+        // looks through all the spots and adds spots the piece can move to the arrayList
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];

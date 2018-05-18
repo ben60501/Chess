@@ -18,8 +18,15 @@ public class King extends GamePiece {
 
     public ArrayList<int[]> getPossibleMoves() {
         possibleMoves = new ArrayList<>();
-        int[][] spotsToLook = {{row - 1, column - 1}, {row - 1, column}, {row - 1, column + 1}, {row, column - 1},
-                {row, column + 1}, {row + 1, column - 1}, {row + 1, column}, {row + 1, column + 1}};
+        int[][] spotsToLook = {
+                {row - 1, column - 1}, // bottom three
+                {row - 1, column},
+                {row - 1, column + 1},
+                {row, column - 1},     // middle two
+                {row, column + 1},
+                {row + 1, column - 1}, // top three
+                {row + 1, column},
+                {row + 1, column + 1}};
         int row;
         int column;
         for(int[] coordinate: spotsToLook){

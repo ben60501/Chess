@@ -1,5 +1,7 @@
 package Pieces;
 
+import Chess.Chess;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -15,6 +17,31 @@ public class Knight extends GamePiece {
     }
 
     public ArrayList<int[]> getPossibleMoves() {
+        possibleMoves = new ArrayList<>();
+        int[][] spotsToLook = {
+                {row + 2, column + 1}, // bottom
+                {row + 2, column - 1},
+                {row - 2, column + 1}, // top
+                {row - 2, column - 1},
+                {row + 1, column + 2}, // right
+                {row - 1, column + 2},
+                {row + 1, column - 2}, // left
+                {row - 1, column - 2}};
+        int row;
+        int column;
+        for(int[] coordinate: spotsToLook){
+            row = coordinate[0];
+            column = coordinate[1];
+            if(Chess.chessBoard[row][column] == 0){
+                possibleMoves.add(coordinate);
+            }
+            else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
+                possibleMoves.add(coordinate);
+            }
+            else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
+                possibleMoves.add(coordinate);
+            }
+        }
         return possibleMoves;
     }
 }

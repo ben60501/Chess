@@ -2,10 +2,13 @@ package Pieces;
 
 import Chess.Chess;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Pawn extends GamePiece {
     private ArrayList<int[]> possibleMoves;
+
+    public ImageIcon image;
 
     private boolean hasMoved = false;
 

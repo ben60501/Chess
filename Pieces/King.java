@@ -2,10 +2,13 @@ package Pieces;
 
 import Chess.Chess;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class King extends GamePiece {
     private ArrayList<int[]> possibleMoves;
+
+    public ImageIcon image;
 
     public King(int row, int column, Color pieceColor, boolean isSelected) {
         super(row, column, pieceColor, isSelected);

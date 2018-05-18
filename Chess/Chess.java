@@ -1,7 +1,10 @@
 package Chess;
 
+import Pieces.*;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Chess extends JPanel {
 
@@ -16,6 +19,35 @@ public class Chess extends JPanel {
             {1, 1, 1, 1, 1, 1, 1, 1},
     };
 
+    private ArrayList<GamePiece> pieces = new ArrayList<>();
+
+    Chess() {
+        //Create Pieces
+        pieces.add(new Castle(7, 0, GamePiece.Color.Black, false));
+        pieces.add(new Knight(7, 1, GamePiece.Color.Black, false));
+        pieces.add(new Bishop(7, 2, GamePiece.Color.Black, false));
+        pieces.add(new Queen(7, 3, GamePiece.Color.Black, false));
+        pieces.add(new King(7, 4, GamePiece.Color.Black, false));
+        pieces.add(new Bishop(7, 5, GamePiece.Color.Black, false));
+        pieces.add(new Knight(7, 6, GamePiece.Color.Black, false));
+        pieces.add(new Castle(7, 7, GamePiece.Color.Black, false));
+        for (int col = 0; col < 8; col++) {
+            pieces.add(new Pawn(6, col, GamePiece.Color.Black, false));
+        }
+
+        pieces.add(new Castle(0, 0, GamePiece.Color.Red, false));
+        pieces.add(new Knight(0, 1, GamePiece.Color.Red, false));
+        pieces.add(new Bishop(0, 2, GamePiece.Color.Red, false));
+        pieces.add(new Queen(0, 3, GamePiece.Color.Red, false));
+        pieces.add(new King(0, 4, GamePiece.Color.Red, false));
+        pieces.add(new Bishop(0, 5, GamePiece.Color.Red, false));
+        pieces.add(new Knight(0, 6, GamePiece.Color.Red, false));
+        pieces.add(new Castle(0, 7, GamePiece.Color.Red, false));
+        for (int col = 0; col < 8; col++) {
+            pieces.add(new Pawn(1, col, GamePiece.Color.Red, false));
+        }
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -27,6 +59,11 @@ public class Chess extends JPanel {
                 g.setColor(Color.DARK_GRAY);
                 g.fillRect(col * 100, row * 100, 100, 100);
             }
+        }
+
+        //Draw Pieces
+        for (GamePiece piece: pieces) {
+            System.out.println(piece);
         }
     }
 }

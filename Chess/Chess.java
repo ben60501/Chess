@@ -4,6 +4,8 @@ import Pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Chess extends JPanel {
@@ -72,5 +74,23 @@ public class Chess extends JPanel {
         }
 
 
+    }
+    private class CheckersMouseListener implements MouseListener
+    {
+
+        public void mouseClicked(MouseEvent e) {
+            int x = e.getX();
+            int y = e.getY();
+
+            repaint();
+        }
+
+        public void mousePressed(MouseEvent e) { }
+
+        public void mouseReleased(MouseEvent e) { }
+
+        public void mouseEntered(MouseEvent e) { }
+
+        public void mouseExited(MouseEvent e) { }
     }
 }

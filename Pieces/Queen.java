@@ -2,28 +2,15 @@ package Pieces;
 
 import Chess.Chess;
 
-import javax.swing.*;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Queen extends GamePiece {
     private ArrayList<int[]> possibleMoves;
 
-    public ImageIcon image;
-
     public Queen(int row, int column, Color pieceColor, boolean isSelected) {
         super(row, column, pieceColor, isSelected);
 
         possibleMoves = new ArrayList<>();
-
-        URL url;
-        if (pieceColor == GamePiece.Color.Black) {
-            url = getClass().getResource("src/Chess/ChessSprites/BlackQueen.png");
-        } else {
-            url = getClass().getResource("src/Chess/ChessSprites/WhiteQueen.png");
-        }
-
-        image = new ImageIcon(url);
     }
 
 

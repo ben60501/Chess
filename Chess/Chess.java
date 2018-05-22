@@ -4,6 +4,8 @@ import Pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Chess extends JPanel {
@@ -63,7 +65,32 @@ public class Chess extends JPanel {
 
         //Draw Pieces
         for (GamePiece piece: pieces) {
-            System.out.println(piece);
+            String stringPiece = piece.toString();
+            stringPiece = stringPiece.substring(7, stringPiece.indexOf("@"));
+
+            //TODO: C and M - Check to see if string piece is "Pawn" .... and draw the image in the location
+
+            System.out.println(stringPiece);
         }
+
+
+    }
+    private class CheckersMouseListener implements MouseListener
+    {
+
+        public void mouseClicked(MouseEvent e) {
+            int x = e.getX();
+            int y = e.getY();
+
+            repaint();
+        }
+
+        public void mousePressed(MouseEvent e) { }
+
+        public void mouseReleased(MouseEvent e) { }
+
+        public void mouseEntered(MouseEvent e) { }
+
+        public void mouseExited(MouseEvent e) { }
     }
 }

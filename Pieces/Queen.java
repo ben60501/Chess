@@ -101,4 +101,16 @@ public class Queen extends GamePiece {
 
         return moves;
     }
+
+    public void moveToCoordinate(int row, int column) {
+        Chess.chessBoard[this.row][this.column] = 0;
+        if (this.pieceColor == GamePiece.Color.Black) {
+            Chess.chessBoard[row][column] = 1;
+        } else {
+            Chess.chessBoard[row][column] = -1;
+        }
+
+        this.row = row;
+        this.column = column;
+    }
 }

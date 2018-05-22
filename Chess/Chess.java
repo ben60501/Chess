@@ -63,7 +63,14 @@ public class Chess extends JPanel {
 
         //Draw Pieces
         for (GamePiece piece: pieces) {
-            System.out.println(piece);
+            String stringPiece = piece.toString();
+            stringPiece = stringPiece.substring(7, stringPiece.indexOf("@"));
+
+            //TODO: C and M - Check to see if string piece is "Pawn" .... and draw the image in the location
+
+            System.out.println(stringPiece);
         }
+
+
     }
 }

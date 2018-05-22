@@ -83,13 +83,29 @@ public class Chess extends JPanel {
 
 
     }
+    private int selectedRow;
+    private int selectedColumn;
+    private boolean isSelected = false; // go through all pieces first
+    // create a turn variable
+    private void selectPiece() {
+        for (GamePiece piece: pieces) {
+            if (piece.getRow() == selectedRow && piece.getColumn() == selectedColumn /*&& piece.getPieceColor() == turn*/) {
+                piece.changeSelected(true);
+            } else {
+                piece.changeSelected(false);
+            }
+        }
+
+        isSelected = true;
+    }
     private class CheckersMouseListener implements MouseListener
     {
 
         public void mouseClicked(MouseEvent e) {
             int x = e.getX();
             int y = e.getY();
-
+            selectedRow = x;
+            selectedColumn = y;
             repaint();
         }
 

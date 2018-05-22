@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Chess extends JPanel {
@@ -67,10 +68,17 @@ public class Chess extends JPanel {
         for (GamePiece piece: pieces) {
             String stringPiece = piece.toString();
             stringPiece = stringPiece.substring(7, stringPiece.indexOf("@"));
+            String imagePath = "ChessSprites/";
 
-            //TODO: C and M - Check to see if string piece is "Pawn" .... and draw the image in the location
+            if (piece.getPieceColor() == GamePiece.Color.Black) {
+                imagePath += "Black" + stringPiece + ".png";
+            } else {
+                imagePath += "White" + stringPiece + ".png";
+            }
 
-            System.out.println(stringPiece);
+            URL pieceURL = getClass().getResource(imagePath);
+            ImageIcon image = new ImageIcon(pieceURL);
+            image.paintIcon(this, g, piece.getColumn() * 100, piece.getRow() * 100);
         }
 
 

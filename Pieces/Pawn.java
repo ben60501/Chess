@@ -6,11 +6,13 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Pawn extends GamePiece {
-    private ArrayList<int[]> possibleMoves;
+     private ArrayList<int[]> possibleMoves;
 
     public ImageIcon image;
 
     private boolean hasMoved = false;
+    
+    private final int moveAmount = 1;
 
     public Pawn(int row, int column, Color pieceColor, boolean isSelected) {
         super(row, column, pieceColor, isSelected);
@@ -35,4 +37,7 @@ public class Pawn extends GamePiece {
 
         return possibleMoves;
     }
+    
+    
+    
 }

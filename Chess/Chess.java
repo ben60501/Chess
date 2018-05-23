@@ -70,7 +70,9 @@ public class Chess extends JPanel {
             }
         }
 
-        //Draw Pieces
+        //Draw Pieces and check for game over
+        boolean hasFoundBlackKing = false;
+        boolean hasFoundWhiteKing = false;
         for (GamePiece piece: pieces) {
             String stringPiece = piece.toString();
             stringPiece = stringPiece.substring(7, stringPiece.indexOf("@"));
@@ -78,8 +80,14 @@ public class Chess extends JPanel {
 
             if (piece.getPieceColor() == GamePiece.Color.Black) {
                 imagePath += "Black" + stringPiece + ".png";
+                if (stringPiece.equals("King")) {
+                    hasFoundBlackKing = true;
+                }
             } else {
                 imagePath += "White" + stringPiece + ".png";
+                if (stringPiece.equals("King")) {
+                    hasFoundWhiteKing = true;
+                }
             }
 
             URL pieceURL = getClass().getResource(imagePath);
@@ -87,7 +95,11 @@ public class Chess extends JPanel {
             image.paintIcon(this, g, piece.getColumn() * 100, piece.getRow() * 100);
         }
 
-
+        if (!hasFoundBlackKing) {
+            System.out.println("Black Looses");
+        } else if (!hasFoundWhiteKing) {
+            System.out.println("White Looses");
+        }
     }
     //to let the player select the piece
     private void selectPiece() {

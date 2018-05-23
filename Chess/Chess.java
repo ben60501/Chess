@@ -23,6 +23,12 @@ public class Chess extends JPanel {
     };
 
     private ArrayList<GamePiece> pieces = new ArrayList<>();
+    private int selectedRow;
+    private int selectedColumn;
+    private boolean isSelected = false; // go through all pieces first
+    private GamePiece.Color turn = GamePiece.Color.Black;
+// create a turn variable
+
 
     Chess() {
         //Create Pieces
@@ -83,13 +89,10 @@ public class Chess extends JPanel {
 
 
     }
-    private int selectedRow;
-    private int selectedColumn;
-    private boolean isSelected = false; // go through all pieces first
-    // create a turn variable
+    //to let the player select the piece
     private void selectPiece() {
         for (GamePiece piece: pieces) {
-            if (piece.getRow() == selectedRow && piece.getColumn() == selectedColumn /*&& piece.getPieceColor() == turn*/) {
+            if (piece.getRow() == selectedRow && piece.getColumn() == selectedColumn && piece.getPieceColor() == turn) {
                 piece.changeSelected(true);
             } else {
                 piece.changeSelected(false);
@@ -98,6 +101,9 @@ public class Chess extends JPanel {
 
         isSelected = true;
     }
+
+
+
     private class CheckersMouseListener implements MouseListener
     {
 

@@ -1,5 +1,7 @@
 package Pieces;
 
+import java.util.ArrayList;
+
 public class GamePiece {
     public enum Color {
         Black, Red
@@ -9,6 +11,7 @@ public class GamePiece {
     protected int column;
     protected Color pieceColor;
     protected boolean isSelected;
+    protected ArrayList<int[]> getPossibleMoves;
 
 
     public GamePiece(int row, int column, Color pieceColor, boolean isSelected) {
@@ -16,6 +19,7 @@ public class GamePiece {
         this.column = column;
         this.pieceColor = pieceColor;
         this.isSelected = isSelected;
+        getPossibleMoves = new ArrayList<>();
     }
 
     public int getRow() {
@@ -44,5 +48,9 @@ public class GamePiece {
 
     public void changeSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public ArrayList<int[]> getPossibleMoves(){
+        return getPossibleMoves;
     }
 }

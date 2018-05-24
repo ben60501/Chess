@@ -29,6 +29,7 @@ public class Chess extends JPanel {
     private boolean isSelected = false;
     private GamePiece.Color turn = GamePiece.Color.Black;
 
+    private ArrayList<int[]> possibleMoves;
 
     Chess() {
         addMouseListener(new Chess.ChessMouseListener());
@@ -109,7 +110,12 @@ public class Chess extends JPanel {
                 g.drawRect(selectedColumn * 100, selectedRow * 100, 100, 100);
 
                 g.setColor(Color.GREEN);
-                for (int[] possibleMove: piece.getPossibleMoves()) {
+
+                possibleMoves = new ArrayList<>();
+                possibleMoves = piece.getPossibleMoves();
+
+                for (int[] possibleMove: possibleMoves) {
+                    System.out.println(possibleMove[0] + " " + possibleMove[1]);
                     g.drawRect(possibleMove[0] * 100, possibleMove[1] * 100, 100, 100);
                 }
             }

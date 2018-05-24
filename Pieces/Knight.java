@@ -18,10 +18,10 @@ public class Knight extends GamePiece {
 
     public ArrayList<int[]> getPossibleMoves() {
         possibleMoves = new ArrayList<>();
-        int[][] spotsToLook = new int[8][];
+        int[][] spotsToLook = new int[8][8];
 
         int i = 0;
-        while(i<=8) {
+        while(i<8) {
             if (row >= 2 && row <= 5 && column >= 1 && column <= 6) { //row 2, column 1
                 spotsToLook[i] = new int[]{row + 2, column + 1};
                 i++;

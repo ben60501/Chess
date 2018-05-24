@@ -142,6 +142,12 @@ public class Chess extends JPanel {
                 piece.changeSelected(false);
             }
         }
+
+        if (turn == GamePiece.Color.Black) {
+            turn = GamePiece.Color.Red;
+        } else {
+            turn = GamePiece.Color.Black;
+        }
     }
 
     private boolean checkIfInPossibleMoves(int row, int column) {

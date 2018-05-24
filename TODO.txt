@@ -2,5 +2,5 @@ TODO - Check bounds for Knight movements
 TODO - Check bounds for Bishop movements
 TODO - Check bounds for King movements
 TODO - Fix Queen Diagonal Movements (bounces off the side and goes through pieces)
-TODO - Fix Pawn Movement (only returns [5,0])
+TODO - Add capturing to pawn
 TODO - Move pieces when selected one of the possible moves

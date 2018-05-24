@@ -106,7 +106,7 @@ public class Chess extends JPanel {
 
         for (GamePiece piece: pieces) {
             if (piece.isSelected()) {
-                g.setColor(Color.BLUE);
+                g.setColor(Color.RED);
                 g.drawRect(selectedColumn * 100, selectedRow * 100, 100, 100);
 
                 g.setColor(Color.GREEN);
@@ -115,8 +115,7 @@ public class Chess extends JPanel {
                 possibleMoves = piece.getPossibleMoves();
 
                 for (int[] possibleMove: possibleMoves) {
-                    System.out.println(possibleMove[0] + " " + possibleMove[1]);
-                    g.drawRect(possibleMove[0] * 100, possibleMove[1] * 100, 100, 100);
+                    g.drawRect(possibleMove[1] * 100, possibleMove[0] * 100, 100, 100);
                 }
             }
         }
@@ -136,18 +135,54 @@ public class Chess extends JPanel {
         isSelected = true;
     }
 
+    private void moveSelectedPieceToCoordinate(int row, int column) {
+        for (GamePiece piece: pieces) {
+            if (piece.isSelected()) {
+                piece.moveToCoordinate(row, column);
+                piece.changeSelected(false);
+            }
+        }
+    }
+
+    private boolean checkIfInPossibleMoves(int row, int column) {
+        for (int[] possibleMove: possibleMoves) {
+            if (possibleMove[0] == row && possibleMove[1] == column) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private class ChessMouseListener implements MouseListener {
 
         public void mouseClicked(MouseEvent e) {
             int x = e.getX();
             int y = e.getY();
 
-            selectedRow = y / 100;
-            selectedColumn = x / 100;
+            int currentSelectedRow = y / 100;
+            int currentSelectedColumn = x / 100;
 
             if (isSelected) {
-                //Check to move other wise de select
+                if (turn == GamePiece.Color.Black && chessBoard[currentSelectedRow][currentSelectedColumn] == 1) {
+                    selectedRow = currentSelectedRow;
+                    selectedColumn = currentSelectedColumn;
+                    selectPiece();
+                } else if (turn == GamePiece.Color.Red && chessBoard[currentSelectedRow][currentSelectedColumn] == -1) {
+                    selectedRow = currentSelectedRow;
+                    selectedColumn = currentSelectedColumn;
+                    selectPiece();
+                }
+
+
+
+                if (chessBoard[currentSelectedRow][currentSelectedColumn] == 0 &&
+                        checkIfInPossibleMoves(currentSelectedRow, currentSelectedColumn)) {
+                    moveSelectedPieceToCoordinate(currentSelectedRow, currentSelectedColumn);
+                }
             } else {
+                selectedRow = currentSelectedRow;
+                selectedColumn = currentSelectedColumn;
                 selectPiece();
             }
 

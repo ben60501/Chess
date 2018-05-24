@@ -50,7 +50,9 @@ public class GamePiece {
         this.isSelected = isSelected;
     }
 
-    public ArrayList<int[]> getPossibleMoves(){
-        return getPossibleMoves;
+    public ArrayList<int[]> getPossibleMoves() {
+        return new ArrayList<>();
     }
+
+    public void moveToCoordinate(int row, int column) {}
 }

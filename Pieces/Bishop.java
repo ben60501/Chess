@@ -20,7 +20,7 @@ public class Bishop extends GamePiece {
         int row;
         int column;
         // looks through all the spots and adds spots the piece can move to the arrayList
-        for(int[] coordinate: spotsToLook){
+        /*for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];
             if(Chess.chessBoard[row][column] == 0){
@@ -32,7 +32,7 @@ public class Bishop extends GamePiece {
             else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
                 possibleMoves.add(coordinate);
             }
-        }
+        }*/
         return possibleMoves;
     }
     private ArrayList<int[]> spotsToLook(){

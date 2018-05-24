@@ -41,7 +41,7 @@ public class Bishop extends GamePiece {
         int icolumn = column; // the column that the spot is in
 
         // bottom right diagonal
-        while(irow < 8 && icolumn < 8){
+        while(irow <= 7 && icolumn <= 7){
             irow++;
             icolumn++;
             spotsToLook.add(new int[]{irow, icolumn});
@@ -49,7 +49,7 @@ public class Bishop extends GamePiece {
         // top left diagonal
         irow = row;
         icolumn = column;
-        while(irow > 0 && icolumn > 0){
+        while(irow >= 1 && icolumn >=1){
             irow--;
             icolumn--;
             spotsToLook.add(new int[]{irow, icolumn});
@@ -57,7 +57,7 @@ public class Bishop extends GamePiece {
         // bottom left diagonal
         irow = row;
         icolumn = column;
-        while(irow < 8 && icolumn > 0){
+        while(irow <= 7 && icolumn >= 1){
             irow++;
             icolumn--;
             spotsToLook.add(new int[]{irow, icolumn});
@@ -65,7 +65,7 @@ public class Bishop extends GamePiece {
         // top right diagonal
         irow = row;
         icolumn = column;
-        while(irow > 0 && icolumn < 8){
+        while(irow > 1 && icolumn <= 7){
             irow--;
             icolumn++;
             spotsToLook.add(new int[]{irow, icolumn});

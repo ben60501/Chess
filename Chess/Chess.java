@@ -23,14 +23,16 @@ public class Chess extends JPanel {
     };
 
     private ArrayList<GamePiece> pieces = new ArrayList<>();
+
     private int selectedRow;
     private int selectedColumn;
-    private boolean isSelected = false; // go through all pieces first
+    private boolean isSelected = false;
     private GamePiece.Color turn = GamePiece.Color.Black;
-// create a turn variable
 
 
     Chess() {
+        addMouseListener(new Chess.ChessMouseListener());
+
         //Create Pieces
         pieces.add(new Castle(7, 0, GamePiece.Color.Black, false));
         pieces.add(new Knight(7, 1, GamePiece.Color.Black, false));
@@ -100,36 +102,22 @@ public class Chess extends JPanel {
         } else if (!hasFoundWhiteKing) {
             System.out.println("White Looses");
         }
-        if(isSelected){
-            //If the selected spot has a piece on it
-            if (chessBoard[selectedRow][selectedColumn] != 11 && chessBoard[selectedRow][selectedColumn] != 0) {
-                GamePiece.Color boardColor;
-                if (chessBoard[selectedRow][selectedColumn] == 1) {
-                    boardColor = GamePiece.Color.Black;
-                } else {
-                    boardColor = GamePiece.Color.Red;
+
+        for (GamePiece piece: pieces) {
+            if (piece.isSelected()) {
+                g.setColor(Color.BLUE);
+                g.drawRect(selectedColumn * 100, selectedRow * 100, 100, 100);
+
+                g.setColor(Color.GREEN);
+                for (int[] possibleMove: piece.getPossibleMoves()) {
+                    g.drawRect(possibleMove[0] * 100, possibleMove[1] * 100, 100, 100);
                 }
-
-                if (boardColor == turn) {
-                    g.setColor(Color.WHITE);
-                    g.fillOval(selectedColumn * 100 + 20, selectedRow * 100 + 20, 60, 60);
-
-                    possibleMoves();
-
-                    for (int[] coordinate : possibleMoves) {
-                        g.setColor(Color.WHITE);
-                        g.drawRect(coordinate[1] * 100, coordinate[0] * 100, 100, 100);
-                    }
-                }
-            } else {
-                //Deselect
-                isSelected = false;
-                possibleMoves = new ArrayList<>();
             }
         }
 
     }
-    //to let the player select the piece
+
+    //To let the player select the piece
     private void selectPiece() {
         for (GamePiece piece: pieces) {
             if (piece.getRow() == selectedRow && piece.getColumn() == selectedColumn && piece.getPieceColor() == turn) {
@@ -141,25 +129,22 @@ public class Chess extends JPanel {
 
         isSelected = true;
     }
-    private ArrayList<int[]> possibleMoves;
-    private ArrayList<int[]> possibleMoves() {
-        for (GamePiece piece : pieces) {
-            if (piece.isSelected()) {
-                // possibleMoves = piece.
-                // get possible moves for piece
-            }
-        }
-        return possibleMoves;
-    }
 
-        class CheckersMouseListener implements MouseListener
-    {
+    private class ChessMouseListener implements MouseListener {
 
         public void mouseClicked(MouseEvent e) {
             int x = e.getX();
             int y = e.getY();
+
             selectedRow = y / 100;
             selectedColumn = x / 100;
+
+            if (isSelected) {
+                //Check to move other wise de select
+            } else {
+                selectPiece();
+            }
+
             repaint();
         }
 

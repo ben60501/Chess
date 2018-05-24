@@ -30,7 +30,7 @@ public class Knight extends GamePiece {
                 spotsToLook[i] = new int[]{row - 2, column + 1};
                 i++;
                 spotsToLook[i] = new int[]{row - 2, column - 1};
-                i++
+                i++;
             }if (row >= 1 && row <= 6 && column >= 2 && column <= 5)
             {
                 spotsToLook[i] = new int[]{row + 1, column + 2};

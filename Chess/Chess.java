@@ -22,7 +22,7 @@ public class Chess extends JPanel {
             {1, 1, 1, 1, 1, 1, 1, 1},
     };
 
-    private ArrayList<GamePiece> pieces = new ArrayList<>();
+    public static ArrayList<GamePiece> pieces = new ArrayList<>();
 
     private int selectedRow;
     private int selectedColumn;
@@ -180,16 +180,20 @@ public class Chess extends JPanel {
                     selectPiece();
                 }
 
-
-
-                if (chessBoard[currentSelectedRow][currentSelectedColumn] == 0 &&
+                if ((chessBoard[currentSelectedRow][currentSelectedColumn] == 0 ||
+                        (turn == GamePiece.Color.Black && chessBoard[currentSelectedRow][currentSelectedColumn] == -1) ||
+                        (turn == GamePiece.Color.Red && chessBoard[currentSelectedRow][currentSelectedColumn] == 1)) &&
                         checkIfInPossibleMoves(currentSelectedRow, currentSelectedColumn)) {
                     moveSelectedPieceToCoordinate(currentSelectedRow, currentSelectedColumn);
+                    isSelected = false;
                 }
             } else {
-                selectedRow = currentSelectedRow;
-                selectedColumn = currentSelectedColumn;
-                selectPiece();
+                if (turn == GamePiece.Color.Black && chessBoard[currentSelectedRow][currentSelectedColumn] == 1 ||
+                        turn == GamePiece.Color.Red && chessBoard[currentSelectedRow][currentSelectedColumn] == -1) {
+                    selectedRow = currentSelectedRow;
+                    selectedColumn = currentSelectedColumn;
+                    selectPiece();
+                }
             }
 
             repaint();

@@ -34,7 +34,7 @@ public class King extends GamePiece {
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];
-            if (row > 0 && row <= 6 && column > 0 && column <= 6)
+            if (row >= 0 && row <= 7 && column > -1 && column <= 7)
             {
             		if(Chess.chessBoard[row][column] == 0){
             			possibleMoves.add(coordinate);

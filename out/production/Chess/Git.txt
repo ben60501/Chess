@@ -1,0 +1,10 @@
+//To get the code
+git pull origin master
+
+//To save your code
+git add *
+git commit -m "What you did"
+git pull origin master
+//Only if terminal says there is a merge
+    :q!
+git push origin master

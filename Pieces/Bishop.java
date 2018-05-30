@@ -20,18 +20,18 @@ public class Bishop extends GamePiece {
         int row;
         int column;
         // looks through all the spots and adds spots the piece can move to the arrayList
-        for(int[] coordinate: spotsToLook){
-            row = coordinate[0];
-            column = coordinate[1];
-            if(Chess.chessBoard[row][column] == 0){
-                possibleMoves.add(coordinate);
-            }
-            else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
-                possibleMoves.add(coordinate);
-            }
-            else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
-                possibleMoves.add(coordinate);
-            }
+            for(int[] coordinate: spotsToLook){
+                row = coordinate[0];
+                column = coordinate[1];
+                if(Chess.chessBoard[row][column] == 0){
+                    possibleMoves.add(coordinate);
+                }
+                else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
+                    possibleMoves.add(coordinate);
+                }
+                else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
+                    possibleMoves.add(coordinate);
+                }
         }
         return possibleMoves;
     }
@@ -44,6 +44,12 @@ public class Bishop extends GamePiece {
         while(irow <= 6 && icolumn <= 6){
             irow++;
             icolumn++;
+            if(pieceColor == Color.Red && Chess.chessBoard[irow][icolumn] == -1){
+                icolumn = 7;
+            }
+            else if(pieceColor == Color.Black && Chess.chessBoard[irow][icolumn] == 1){
+                icolumn = 7;
+            }else
             spotsToLook.add(new int[]{irow, icolumn});
         }
         // top left diagonal
@@ -52,6 +58,12 @@ public class Bishop extends GamePiece {
         while(irow >= 1 && icolumn >= 1){
             irow--;
             icolumn--;
+            if(pieceColor == Color.Red && Chess.chessBoard[irow][icolumn] == -1){
+                icolumn = 0;
+            }
+            else if(pieceColor == Color.Black && Chess.chessBoard[irow][icolumn] == 1){
+                icolumn = 0;
+            }else
             spotsToLook.add(new int[]{irow, icolumn});
         }
         // bottom left diagonal
@@ -60,6 +72,12 @@ public class Bishop extends GamePiece {
         while(irow <= 6 && icolumn >= 1){
             irow++;
             icolumn--;
+            if(pieceColor == Color.Red && Chess.chessBoard[irow][icolumn] == -1){
+                icolumn = 0;
+            }
+            else if(pieceColor == Color.Black && Chess.chessBoard[irow][icolumn] == 1){
+                icolumn = 0;
+            }else
             spotsToLook.add(new int[]{irow, icolumn});
         }
         // top right diagonal
@@ -68,8 +86,25 @@ public class Bishop extends GamePiece {
         while(irow > 1 && icolumn <= 6){
             irow--;
             icolumn++;
+            if(pieceColor == Color.Red && Chess.chessBoard[irow][icolumn] == -1){
+                icolumn = 7;
+            }
+            else if(pieceColor == Color.Black && Chess.chessBoard[irow][icolumn] == 1){
+                icolumn = 7;
+            }else
             spotsToLook.add(new int[]{irow, icolumn});
         }
         return spotsToLook;
+    }
+    public void moveToCoordinate(int row, int column) {
+        Chess.chessBoard[this.row][this.column] = 0;
+        if (this.pieceColor == GamePiece.Color.Black) {
+            Chess.chessBoard[row][column] = 1;
+        } else {
+            Chess.chessBoard[row][column] = -1;
+        }
+
+        this.row = row;
+        this.column = column;
     }
 }

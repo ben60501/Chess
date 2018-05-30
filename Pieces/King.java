@@ -34,16 +34,31 @@ public class King extends GamePiece {
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];
-            if(Chess.chessBoard[row][column] == 0){
-                possibleMoves.add(coordinate);
-            }
-            else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
-                possibleMoves.add(coordinate);
-            }
-            else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
-                possibleMoves.add(coordinate);
+            if (row > 0 && row <= 6 && column > 0 && column <= 6)
+            {
+            		if(Chess.chessBoard[row][column] == 0){
+            			possibleMoves.add(coordinate);
+            		}
+            		else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
+            			possibleMoves.add(coordinate);
+            		}
+            		else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
+            			possibleMoves.add(coordinate);
+            		}
             }
         }
         return possibleMoves;
+    }
+
+    public void moveToCoordinate(int row, int column) {
+        Chess.chessBoard[this.row][this.column] = 0;
+        if (this.pieceColor == GamePiece.Color.Black) {
+            Chess.chessBoard[row][column] = 1;
+        } else {
+            Chess.chessBoard[row][column] = -1;
+        }
+
+        this.row = row;
+        this.column = column;
     }
 }

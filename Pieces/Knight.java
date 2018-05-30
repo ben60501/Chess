@@ -1,6 +1,7 @@
 package Pieces;
 
 import Chess.Chess;
+import Pieces.GamePiece.Color;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -18,47 +19,61 @@ public class Knight extends GamePiece {
 
     public ArrayList<int[]> getPossibleMoves() {
         possibleMoves = new ArrayList<>();
-        int[][] spotsToLook = new int[8][8];
-
-        int i = 0;
-        while(i<8) {
-            if (row >= 2 && row <= 5 && column >= 1 && column <= 6) { //row 2, column 1
-                spotsToLook[i] = new int[]{row + 2, column + 1};
-                i++;
-                spotsToLook[i] = new int[]{row + 2, column - 1};
-                i++;
-                spotsToLook[i] = new int[]{row - 2, column + 1};
-                i++;
-                spotsToLook[i] = new int[]{row - 2, column - 1};
-                i++;
-            }if (row >= 1 && row <= 6 && column >= 2 && column <= 5)
-            {
-                spotsToLook[i] = new int[]{row + 1, column + 2};
-                i++;
-                spotsToLook[i] = new int[]{row - 1, column + 2};
-                i++;
-                spotsToLook[i] = new int[]{row + 1, column - 2};
-                i++;
-                spotsToLook[i] = new int[]{row - 1, column - 2};
-            }
-
-        }
+        int[][] spotsToLook = {
+                {row + 2 , column - 1},
+                {row + 2, column + 1},
+                {row -2, column - 1},
+                {row -2, column + 1},
+                {row + 1, column - 2},
+                {row + 1, column + 2},
+                {row - 1, column - 2},
+                {row - 1, column + 2}};
+        	
         int row;
         int column;
         // looks through all the spots and adds spots the piece can move to the arrayList
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];
-            if(Chess.chessBoard[row][column] == 0){
-                possibleMoves.add(coordinate);
+            if (row >= 2 && row <= 5 && column >= 0 && column <= 7)
+            {
+            		if(Chess.chessBoard[row][column] == 0){
+            			possibleMoves.add(coordinate);
+            		}
+            		else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
+            			possibleMoves.add(coordinate);
+            		}
+            		else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
+            			possibleMoves.add(coordinate);
+            		}
             }
-            else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
-                possibleMoves.add(coordinate);
-            }
-            else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
-                possibleMoves.add(coordinate);
+            else if (row >= 1 && row <= 6 && column >= 2 && column <= 5)
+            {
+            		if(Chess.chessBoard[row][column] == 0){
+            			possibleMoves.add(coordinate);
+            		}
+            		else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
+            			possibleMoves.add(coordinate);
+            		}
+            		else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
+            			possibleMoves.add(coordinate);
+            		}
             }
         }
         return possibleMoves;
+        
     }
+    
+    public void moveToCoordinate(int row, int column) {
+        Chess.chessBoard[this.row][this.column] = 0;
+        if (this.pieceColor == GamePiece.Color.Black) {
+            Chess.chessBoard[row][column] = 1;
+        } else {
+            Chess.chessBoard[row][column] = -1;
+        }
+
+        this.row = row;
+        this.column = column;
+    }
+    
 }

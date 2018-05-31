@@ -77,8 +77,7 @@ public class Chess extends JPanel {
         boolean hasFoundBlackKing = false;
         boolean hasFoundWhiteKing = false;
         for (GamePiece piece: pieces) {
-            String stringPiece = piece.toString();
-            stringPiece = stringPiece.substring(7, stringPiece.indexOf("@"));
+            String stringPiece = getPieceType(piece);
             String imagePath = "ChessSprites/";
 
             if (piece.getPieceColor() == GamePiece.Color.Black) {
@@ -104,6 +103,8 @@ public class Chess extends JPanel {
             System.out.println("White Looses");
         }
 
+        checkPawnsToBeReplaced();
+
         for (GamePiece piece: pieces) {
             if (piece.isSelected()) {
                 g.setColor(Color.RED);
@@ -120,6 +121,42 @@ public class Chess extends JPanel {
             }
         }
 
+    }
+
+    private void checkPawnsToBeReplaced() {
+        boolean isBlackQueen = false;
+        boolean isWhiteQueen = false;
+
+        for (GamePiece piece: pieces) {
+            if (getPieceType(piece).equals("Queen")) {
+                if (piece.getPieceColor() == GamePiece.Color.Black) {
+                    isBlackQueen = true;
+                } else {
+                    isWhiteQueen = true;
+                }
+            }
+        }
+
+        for (GamePiece piece: pieces) {
+            if (getPieceType(piece).equals("Pawn")) {
+                if (piece.getPieceColor() == GamePiece.Color.Black && !isBlackQueen && piece.getRow() == 0) {
+                    replacePawnWithQueen(piece);
+                } else if (piece.getPieceColor() == GamePiece.Color.Red && !isWhiteQueen && piece.getRow() == 7) {
+                    replacePawnWithQueen(piece);
+                }
+            }
+        }
+    }
+
+    private void replacePawnWithQueen(GamePiece pawn) {
+        GamePiece queen = new Queen(pawn.getRow(), pawn.getColumn(), pawn.getPieceColor(), pawn.isSelected());
+        pieces.add(queen);
+        pieces.remove(pawn);
+    }
+
+
+    private String getPieceType(GamePiece piece) {
+        return piece.toString().substring(7, piece.toString().indexOf("@"));
     }
 
     //To let the player select the piece

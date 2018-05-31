@@ -1,7 +1,5 @@
 package Chess;
 
-import Checkers.Checkers;
-
 import javax.swing.*;
 
 public class ChessMain {

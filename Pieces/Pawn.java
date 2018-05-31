@@ -44,11 +44,11 @@ public class Pawn extends GamePiece {
                 possibleMoves.add(new int[] {row + 2, column});
             }
 
-            if (row < 7 && column < 7 && Chess.chessBoard[row + 1][column + 1] == -1) {
+            if (row < 7 && column < 7 && Chess.chessBoard[row + 1][column + 1] == 1) {
                 possibleMoves.add(new int[] {row + 1, column + 1});
             }
 
-            if (row < 7 && column > 0 && Chess.chessBoard[row + 1][column - 1] == -1) {
+            if (row < 7 && column > 0 && Chess.chessBoard[row + 1][column - 1] == 1) {
                 possibleMoves.add(new int[] {row + 1, column - 1});
             }
         }

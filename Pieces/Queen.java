@@ -120,25 +120,25 @@ public class Queen extends GamePiece {
         ArrayList<int[]> moves = new ArrayList<>();
 
         //moves to the left of the piece
-        int col = column;
-        while (col > 0) {
+        int col = column - 1;
+        while (col >= 0) {
             if (Chess.chessBoard[row][col] == 0) {
                 moves.add(new int[]{row, col});
                 col--;
             }else if (pieceColor == Color.Black && Chess.chessBoard[row][col] == 1){
-                col = 0;
+                col = -1;
             }else if (pieceColor == Color.Red && Chess.chessBoard[row][col] == -1){
-                col = 0;
+                col = -1;
             }else if (pieceColor == Color.Black && Chess.chessBoard[row][col] == 1){
                 moves.add(new int[]{row, col});
-                col = 0;
+                col = -1;
             }else if (pieceColor == Color.Red && Chess.chessBoard[row][col] == -1){
                 moves.add(new int[]{row, col});
-                col = 0;
+                col = -1;
             }
         }
         //moves to the right of the piece
-        col = column;
+        col = column + 1;
         while (col < 8) {
             if (Chess.chessBoard[row][col] == 0) {
                 moves.add(new int[]{row, col});
@@ -175,11 +175,9 @@ public class Queen extends GamePiece {
                 irow = 0;
             } else if (pieceColor == Color.Black && Chess.chessBoard[irow][column] == 1) {
                 moves.add(new int[]{irow, column});
-
                 irow = 0;
             } else if (pieceColor == Color.Red && Chess.chessBoard[irow][column] == -1) {
                 moves.add(new int[]{irow, column});
-
                 irow = 0;
             }
         }

@@ -1,7 +1,6 @@
-TODO - Check bounds for Knight movements
-TODO - Bishop is going through pieces and bounds checking is too aggressive
-TODO - Fix Queen Diagonal Movements (Goes through pieces) and add horizontal movements
-TODO - Add Capturing cod to all of the pieces (Done on pawn and Knight)
+TODO - Queen freezes the game
+TODO - Add Capturing code to Queen
 TODO - Castling
-TODO - Change pawn to queen when it gets to the other end and there is no queen left
+TODO - Change pawn to queen when it gets to the other end and there is no queen left (That stupid error)
+TODO - Check for the first spot is empty when moving the pawn forward two spaces
 

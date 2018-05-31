@@ -36,6 +36,7 @@ public class Bishop extends GamePiece {
         return possibleMoves;
     }
 
+
     private ArrayList<int[]> spotsToLook(){
         ArrayList<int[]> spotsToLook = new ArrayList<>(); // arrayList for all the spots to look at
         int irow = row;       // the row that the spot is in
@@ -119,6 +120,7 @@ public class Bishop extends GamePiece {
         }
         return spotsToLook;
     }
+
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
         if (this.pieceColor == GamePiece.Color.Black) {

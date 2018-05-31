@@ -52,6 +52,16 @@ public class King extends GamePiece {
 
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
+        ArrayList<GamePiece> temp = new ArrayList<>();
+
+        for (GamePiece piece: Chess.pieces) {
+            if (!(piece.getRow() == row && piece.getColumn() == column)) {
+                temp.add(piece);
+            }
+        }
+
+        Chess.pieces = temp;
+
         if (this.pieceColor == GamePiece.Color.Black) {
             Chess.chessBoard[row][column] = 1;
         } else {

@@ -35,7 +35,7 @@ public class Knight extends GamePiece {
         for(int[] coordinate: spotsToLook){
             row = coordinate[0];
             column = coordinate[1];
-            if (row >= 2 && row <= 5 && column >= 0 && column <= 7)
+            if (row >= 0 && row <= 7 && column >= 0 && column <= 7)
             {
             		if(Chess.chessBoard[row][column] == 0){
             			possibleMoves.add(coordinate);
@@ -47,7 +47,7 @@ public class Knight extends GamePiece {
             			possibleMoves.add(coordinate);
             		}
             }
-            else if (row >= 1 && row <= 6 && column >= 2 && column <= 5)
+           /* else if (row >= 1 && row <= 6 && column >= 2 && column <= 5)
             {
             		if(Chess.chessBoard[row][column] == 0){
             			possibleMoves.add(coordinate);
@@ -58,7 +58,7 @@ public class Knight extends GamePiece {
             		else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
             			possibleMoves.add(coordinate);
             		}
-            }
+            }*/
         }
         return possibleMoves;
         

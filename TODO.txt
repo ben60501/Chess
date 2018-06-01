@@ -1,4 +1,4 @@
 TODO - Queen freezes the game
 TODO - Castling
-TODO - Change pawn to queen when it gets to the other end and there is no queen left (That stupid error)
+
 

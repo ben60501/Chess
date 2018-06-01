@@ -23,7 +23,7 @@ public class Pawn extends GamePiece {
                 possibleMoves.add(new int[] {row - 1, column});
             }
 
-            if (row > 1 && !hasMoved && Chess.chessBoard[row - 2][column] == 0) {
+            if (row > 1 && !hasMoved && Chess.chessBoard[row - 2][column] == 0 && Chess.chessBoard[row - 1][column] == 0) {
                 possibleMoves.add(new int[] {row - 2, column});
             }
 
@@ -40,7 +40,7 @@ public class Pawn extends GamePiece {
                 possibleMoves.add(new int[] {row + 1, column});
             }
 
-            if (row < 6 && !hasMoved && Chess.chessBoard[row + 2][column] == 0) {
+            if (row < 6 && !hasMoved && Chess.chessBoard[row + 2][column] == 0 && Chess.chessBoard[row + 1][column] == 0) {
                 possibleMoves.add(new int[] {row + 2, column});
             }
 

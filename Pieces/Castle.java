@@ -34,17 +34,62 @@ public class Castle extends GamePiece {
     private ArrayList<int[]> findMovesInRow() {
         //Stores all of the moves in the row
         ArrayList<int[]> moves = new ArrayList<>();
+        boolean shouldLoop = true;
 
-        //Loops over all of the row and finds the moves that the piece can go
-        for (int col = 0; col < 8; col++) {
-            if (Chess.chessBoard[row][col] == 0) {
-                moves.add(new int[] {row, col});
-            } else if (pieceColor == Color.Black && Chess.chessBoard[row][col] == -1) {
-                moves.add(new int[] {row, col});
-            } else if (pieceColor == Color.Red && Chess.chessBoard[row][col] == 1) {
-                moves.add(new int[] {row, col});
+        //Finds moves to the left of the queen
+        for (int column = this.column - 1; column >= 0; column--) {
+            if (shouldLoop) {
+                if (this.pieceColor == GamePiece.Color.Black) {
+                    if (Chess.chessBoard[this.row][column] == 0) {
+                        moves.add(new int[] {this.row, column});
+                    } else if (Chess.chessBoard[this.row][column] == -1) {
+                        moves.add(new int[] {this.row, column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+
+                } else if (this.pieceColor == GamePiece.Color.Red) {
+                    if (Chess.chessBoard[this.row][column] == 0) {
+                        moves.add(new int[] {this.row, column});
+                    } else if (Chess.chessBoard[this.row][column] == 1) {
+                        moves.add(new int[] {this.row, column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+                }
             }
         }
+
+        shouldLoop = true;
+
+        //Finds moves to the right of the queen
+        for (int column = this.column + 1; column < 8; column++) {
+            if (shouldLoop) {
+                if (this.pieceColor == GamePiece.Color.Black) {
+                    if (Chess.chessBoard[this.row][column] == 0) {
+                        moves.add(new int[] {this.row, column});
+                    } else if (Chess.chessBoard[this.row][column] == -1) {
+                        moves.add(new int[] {this.row, column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+
+                } else if (this.pieceColor == GamePiece.Color.Red) {
+                    if (Chess.chessBoard[this.row][column] == 0) {
+                        moves.add(new int[] {this.row, column});
+                    } else if (Chess.chessBoard[this.row][column] == 1) {
+                        moves.add(new int[] {this.row, column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+                }
+            }
+        }
+
 
         return moves;
     }
@@ -53,18 +98,84 @@ public class Castle extends GamePiece {
     private ArrayList<int[]> findMovesInCol() {
         //Stores all of the moves in the column
         ArrayList<int[]> moves = new ArrayList<>();
+        boolean shouldLoop = true;
 
-        //Loops over all of the column and finds the moves that the piece can go
-        for (int col = 0; col < 8; col++) {
-            if (Chess.chessBoard[row][col] == 0) {
-                moves.add(new int[] {row, col});
-            } else if (pieceColor == Color.Black && Chess.chessBoard[row][col] == -1) {
-                moves.add(new int[] {row, col});
-            } else if (pieceColor == Color.Red && Chess.chessBoard[row][col] == 1) {
-                moves.add(new int[] {row, col});
+        //Find moves above the queen
+        for (int row = this.row - 1; row >= 0; row--) {
+            if (shouldLoop) {
+                if (this.pieceColor == GamePiece.Color.Black) {
+                    if (Chess.chessBoard[row][this.column] == 0) {
+                        moves.add(new int[] {row, this.column});
+                    } else if (Chess.chessBoard[row][this.column] == -1) {
+                        moves.add(new int[] {row, this.column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+
+                } else if (this.pieceColor == GamePiece.Color.Red) {
+                    if (Chess.chessBoard[row][this.column] == 0) {
+                        moves.add(new int[] {row, this.column});
+                    } else if (Chess.chessBoard[row][this.column] == 1) {
+                        moves.add(new int[] {row, this.column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+                }
+            }
+        }
+
+        shouldLoop = true;
+
+        //Finds moves below the queen
+        for (int row = this.row + 1; row < 8; row++) {
+            if (shouldLoop) {
+                if (this.pieceColor == GamePiece.Color.Black) {
+                    if (Chess.chessBoard[row][this.column] == 0) {
+                        moves.add(new int[]{row, this.column});
+                    } else if (Chess.chessBoard[row][this.column] == -1) {
+                        moves.add(new int[]{row, this.column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+
+                } else if (this.pieceColor == GamePiece.Color.Red) {
+                    if (Chess.chessBoard[row][this.column] == 0) {
+                        moves.add(new int[]{row, this.column});
+                    } else if (Chess.chessBoard[row][this.column] == 1) {
+                        moves.add(new int[]{row, this.column});
+                        shouldLoop = false;
+                    } else {
+                        shouldLoop = false;
+                    }
+                }
             }
         }
 
         return moves;
+    }
+
+    public void moveToCoordinate(int row, int column) {
+        Chess.chessBoard[this.row][this.column] = 0;
+        ArrayList<GamePiece> temp = new ArrayList<>();
+
+        for (GamePiece piece: Chess.pieces) {
+            if (!(piece.getRow() == row && piece.getColumn() == column)) {
+                temp.add(piece);
+            }
+        }
+
+        Chess.pieces = temp;
+
+        if (this.pieceColor == GamePiece.Color.Black) {
+            Chess.chessBoard[row][column] = 1;
+        } else {
+            Chess.chessBoard[row][column] = -1;
+        }
+
+        this.row = row;
+        this.column = column;
     }
 }

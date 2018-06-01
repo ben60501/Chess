@@ -165,20 +165,20 @@ public class Queen extends GamePiece {
 
         //finds moves above piece
         int irow = row - 1;
-        while (irow > 0) {
+        while (irow >= 0) {
             if (Chess.chessBoard[irow][column] == 0) {
                 moves.add(new int[]{irow, column});
                 irow--;
             } else if (pieceColor == Color.Black && Chess.chessBoard[irow][column] == 1) {
-                irow = 0;
+                irow = -1;
             } else if (pieceColor == Color.Red && Chess.chessBoard[irow][column] == -1) {
-                irow = 0;
+                irow = -1;
             } else if (pieceColor == Color.Black && Chess.chessBoard[irow][column] == 1) {
                 moves.add(new int[]{irow, column});
-                irow = 0;
+                irow = -1;
             } else if (pieceColor == Color.Red && Chess.chessBoard[irow][column] == -1) {
                 moves.add(new int[]{irow, column});
-                irow = 0;
+                irow = -1;
             }
         }
 
@@ -202,6 +202,7 @@ public class Queen extends GamePiece {
         }
         return moves;
     }
+
 
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Castle extends GamePiece {
     private ArrayList<int[]> possibleMoves;
-
+    private int moves;
     public ImageIcon image;
 
     public Castle(int row, int column, Color pieceColor, boolean isSelected) {
@@ -157,6 +157,10 @@ public class Castle extends GamePiece {
         return moves;
     }
 
+    public int getMoves(){
+        return moves;
+    }
+
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
         ArrayList<GamePiece> temp = new ArrayList<>();
@@ -177,5 +181,6 @@ public class Castle extends GamePiece {
 
         this.row = row;
         this.column = column;
+        moves++;
     }
 }

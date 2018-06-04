@@ -186,6 +186,7 @@ public class Chess extends JPanel {
     private void moveSelectedPieceToCoordinate(int row, int column) {
         for (GamePiece piece: pieces) {
             if (piece.isSelected()) {
+                if(piece.isSelected() UFDSHFJAHJ )
                 piece.moveToCoordinate(row, column);
                 piece.changeSelected(false);
             }

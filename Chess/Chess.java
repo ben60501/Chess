@@ -103,8 +103,6 @@ public class Chess extends JPanel {
             System.out.println("White Looses");
         }
 
-        checkPawnsToBeReplaced();
-
         for (GamePiece piece: pieces) {
             if (piece.isSelected()) {
                 g.setColor(Color.RED);
@@ -141,7 +139,9 @@ public class Chess extends JPanel {
             if (getPieceType(piece).equals("Pawn")) {
                 if (piece.getPieceColor() == GamePiece.Color.Black && !isBlackQueen && piece.getRow() == 0) {
                     replacePawnWithQueen(piece);
-                } else if (piece.getPieceColor() == GamePiece.Color.Red && !isWhiteQueen && piece.getRow() == 7) {
+                }
+
+                if (piece.getPieceColor() == GamePiece.Color.Red && !isWhiteQueen && piece.getRow() == 7) {
                     replacePawnWithQueen(piece);
                 }
             }
@@ -150,8 +150,19 @@ public class Chess extends JPanel {
 
     private void replacePawnWithQueen(GamePiece pawn) {
         GamePiece queen = new Queen(pawn.getRow(), pawn.getColumn(), pawn.getPieceColor(), pawn.isSelected());
-        pieces.add(queen);
-        pieces.remove(pawn);
+        ArrayList<GamePiece> temp = new ArrayList<>();
+
+        for (GamePiece piece: pieces) {
+            if (!(piece.getRow() == pawn.getRow() && piece.getColumn() == pawn.getColumn() && piece.getPieceColor() == pawn.getPieceColor())) {
+                temp.add(piece);
+            }
+        }
+
+        temp.add(queen);
+        pieces = temp;
+
+        repaint();
+
     }
 
 
@@ -185,6 +196,8 @@ public class Chess extends JPanel {
         } else {
             turn = GamePiece.Color.Black;
         }
+
+        checkPawnsToBeReplaced();
     }
 
     private boolean checkIfInPossibleMoves(int row, int column) {

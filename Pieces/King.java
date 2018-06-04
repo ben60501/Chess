@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 public class King extends GamePiece {
     private ArrayList<int[]> possibleMoves;
-    private int moves = 0;
+    private int bMoves = 0;
+    private int rMoves = 0;
     public ImageIcon image;
 
     public King(int row, int column, Color pieceColor, boolean isSelected) {
@@ -50,8 +51,11 @@ public class King extends GamePiece {
         return possibleMoves;
     }
 
-    public int getMoves(){
-        return moves;
+    public int getBMoves(){
+        return bMoves;
+    }
+    public int getRMoves(){
+        return rMoves;
     }
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
@@ -73,6 +77,11 @@ public class King extends GamePiece {
 
         this.row = row;
         this.column = column;
-        moves++;
+
+        if(this.pieceColor == Color.Black){
+            bMoves++;
+        }else if(this.pieceColor == Color.Red){
+            rMoves++;
+        }
     }
 }

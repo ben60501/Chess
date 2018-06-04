@@ -26,18 +26,6 @@ public class Castle extends GamePiece {
         //Adds all of the moves to possible moves
         possibleMoves.addAll(rowMoves);
         possibleMoves.addAll(colMoves);
-        //TODO: I tried im sorry, theres something wrong with this
-        if(this.pieceColor == GamePiece.Color.Black && getMoves() == 0){
-            if(King.getBMoves == 0) {
-                possibleMoves.add(new int[]{7, 4});
-            }
-
-        }
-        else if(this.pieceColor == GamePiece.Color.Red && getMoves() == 0){
-            if(King.getRMoves == 0) {
-                possibleMoves.add(new int[]{0, 4});
-            }
-        }
         return possibleMoves;
     }
 

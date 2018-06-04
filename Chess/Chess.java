@@ -112,6 +112,16 @@ public class Chess extends JPanel {
 
                 possibleMoves = new ArrayList<>();
                 possibleMoves = piece.getPossibleMoves();
+                if(piece == Castle && piece.getPieceColor() == GamePiece.Color.Black && Castle.getMoves() == 0){
+                    if(King.getBMoves() == 0) {
+                        possibleMoves.add(new int[]{7, 4});
+                    }
+
+                } else if(piece == Castle && piece.getPieceColor() == GamePiece.Color.Red && Castle.getMoves() == 0){
+                    if(King.getRMoves() == 0) {
+                        possibleMoves.add(new int[]{0, 4});
+                    }
+                }
 
                 for (int[] possibleMove: possibleMoves) {
                     g.drawRect(possibleMove[1] * 100, possibleMove[0] * 100, 100, 100);
@@ -164,7 +174,6 @@ public class Chess extends JPanel {
         repaint();
 
     }
-
 
     private String getPieceType(GamePiece piece) {
         return piece.toString().substring(7, piece.toString().indexOf("@"));

@@ -26,7 +26,9 @@ public class Castle extends GamePiece {
         //Adds all of the moves to possible moves
         possibleMoves.addAll(rowMoves);
         possibleMoves.addAll(colMoves);
-
+        if(this.pieceColor == GamePiece.Color.Black && getMoves() == 0){
+            if(King.getMoves() == 0)
+        }
         return possibleMoves;
     }
 

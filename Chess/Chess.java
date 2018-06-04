@@ -112,6 +112,8 @@ public class Chess extends JPanel {
 
                 possibleMoves = new ArrayList<>();
                 possibleMoves = piece.getPossibleMoves();
+                //make a separate count for red and black castle pieces
+                //do the alternate, if king was selected rather than a castle
                 if(piece == Castle && piece.getPieceColor() == GamePiece.Color.Black && Castle.getMoves() == 0){
                     if(King.getBMoves() == 0) {
                         possibleMoves.add(new int[]{7, 4});

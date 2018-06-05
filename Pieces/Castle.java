@@ -2,18 +2,21 @@ package Pieces;
 
 import Chess.Chess;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Castle extends GamePiece {
     private ArrayList<int[]> possibleMoves;
-    private int moves;
-    public ImageIcon image;
+
+    public boolean canCastle = true;
 
     public Castle(int row, int column, Color pieceColor, boolean isSelected) {
         super(row, column, pieceColor, isSelected);
 
         possibleMoves = new ArrayList<>();
+
+        if (column == 0) {
+            canCastle = false;
+        }
     }
 
     public ArrayList<int[]> getPossibleMoves() {
@@ -26,6 +29,7 @@ public class Castle extends GamePiece {
         //Adds all of the moves to possible moves
         possibleMoves.addAll(rowMoves);
         possibleMoves.addAll(colMoves);
+
         return possibleMoves;
     }
 
@@ -93,7 +97,6 @@ public class Castle extends GamePiece {
         return moves;
     }
 
-
     private ArrayList<int[]> findMovesInCol() {
         //Stores all of the moves in the column
         ArrayList<int[]> moves = new ArrayList<>();
@@ -156,10 +159,6 @@ public class Castle extends GamePiece {
         return moves;
     }
 
-    public int getMoves(){
-        return moves;
-    }
-
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
         ArrayList<GamePiece> temp = new ArrayList<>();
@@ -180,6 +179,7 @@ public class Castle extends GamePiece {
 
         this.row = row;
         this.column = column;
-        moves++;
+
+        canCastle = false;
     }
 }

@@ -58,6 +58,14 @@ public class Chess extends JPanel {
         for (int col = 0; col < 8; col++) {
             pieces.add(new Pawn(1, col, GamePiece.Color.Red, false));
         }
+
+        King blackKing = (King) pieces.get(4);
+        King whiteKing = (King) pieces.get(20);
+
+        blackKing.castlingPair = (Castle) pieces.get(7);
+        whiteKing.castlingPair = (Castle) pieces.get(23);
+        System.out.println(pieces.get(23));
+
     }
 
     public void paintComponent(Graphics g) {
@@ -97,12 +105,20 @@ public class Chess extends JPanel {
             image.paintIcon(this, g, piece.getColumn() * 100, piece.getRow() * 100);
         }
 
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Verdana", Font.BOLD, 40));
+
+        //Checks for Game Over
         if (!hasFoundBlackKing) {
-            System.out.println("Black Looses");
+            g.drawString("White Wins!", 270, 415);
         } else if (!hasFoundWhiteKing) {
-            System.out.println("White Looses");
+            g.drawString("Black Wins!", 270, 415);
         }
 
+        //Checks for pawns that can be changed to queens
+        checkPawnsToBeReplaced();
+
+        //Draws the box around the selected piece and possible moves
         for (GamePiece piece: pieces) {
             if (piece.isSelected()) {
                 g.setColor(Color.RED);
@@ -112,25 +128,36 @@ public class Chess extends JPanel {
 
                 possibleMoves = new ArrayList<>();
                 possibleMoves = piece.getPossibleMoves();
-                //make a separate count for red and black castle pieces
-                //do the alternate, if king was selected rather than a castle
-                if(piece == Castle && piece.getPieceColor() == GamePiece.Color.Black && Castle.getMoves() == 0){
-                    if(King.getBMoves() == 0) {
-                        possibleMoves.add(new int[]{7, 4});
-                    }
-
-                } else if(piece == Castle && piece.getPieceColor() == GamePiece.Color.Red && Castle.getMoves() == 0){
-                    if(King.getRMoves() == 0) {
-                        possibleMoves.add(new int[]{0, 4});
-                    }
-                }
 
                 for (int[] possibleMove: possibleMoves) {
                     g.drawRect(possibleMove[1] * 100, possibleMove[0] * 100, 100, 100);
                 }
+
+                if (getPieceType(piece).equals("Castle")) {
+                    Castle castle = (Castle) piece;
+                    if (castle.getPieceColor() == GamePiece.Color.Black && castle.getRow() == 7 && castle.getColumn() == 7) {
+                        if (!castle.canCastle) {
+                            changeKingToNotCastle(GamePiece.Color.Black);
+                        }
+                    } else if (castle.getPieceColor() == GamePiece.Color.Red && castle.getRow() == 0 && castle.getColumn() == 0) {
+                        if (!castle.canCastle) {
+                            changeKingToNotCastle(GamePiece.Color.Red);
+                        }
+                    }
+                }
+
             }
         }
 
+    }
+
+    private void changeKingToNotCastle(GamePiece.Color pieceColor) {
+        for (GamePiece piece: pieces) {
+            if (piece.getPieceColor() == pieceColor && getPieceType(piece).equals("King")) {
+                King king = (King) piece;
+                king.canCastle = false;
+            }
+        }
     }
 
     private void checkPawnsToBeReplaced() {
@@ -151,9 +178,7 @@ public class Chess extends JPanel {
             if (getPieceType(piece).equals("Pawn")) {
                 if (piece.getPieceColor() == GamePiece.Color.Black && !isBlackQueen && piece.getRow() == 0) {
                     replacePawnWithQueen(piece);
-                }
-
-                if (piece.getPieceColor() == GamePiece.Color.Red && !isWhiteQueen && piece.getRow() == 7) {
+                } else if (piece.getPieceColor() == GamePiece.Color.Red && !isWhiteQueen && piece.getRow() == 7) {
                     replacePawnWithQueen(piece);
                 }
             }
@@ -162,20 +187,10 @@ public class Chess extends JPanel {
 
     private void replacePawnWithQueen(GamePiece pawn) {
         GamePiece queen = new Queen(pawn.getRow(), pawn.getColumn(), pawn.getPieceColor(), pawn.isSelected());
-        ArrayList<GamePiece> temp = new ArrayList<>();
-
-        for (GamePiece piece: pieces) {
-            if (!(piece.getRow() == pawn.getRow() && piece.getColumn() == pawn.getColumn() && piece.getPieceColor() == pawn.getPieceColor())) {
-                temp.add(piece);
-            }
-        }
-
-        temp.add(queen);
-        pieces = temp;
-
-        repaint();
-
+        pieces.add(queen);
+        pieces.remove(pawn);
     }
+
 
     private String getPieceType(GamePiece piece) {
         return piece.toString().substring(7, piece.toString().indexOf("@"));
@@ -207,8 +222,6 @@ public class Chess extends JPanel {
         } else {
             turn = GamePiece.Color.Black;
         }
-
-        checkPawnsToBeReplaced();
     }
 
     private boolean checkIfInPossibleMoves(int row, int column) {

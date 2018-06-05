@@ -2,14 +2,15 @@ package Pieces;
 
 import Chess.Chess;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class King extends GamePiece {
+
     private ArrayList<int[]> possibleMoves;
-    private int bMoves = 0;
-    private int rMoves = 0;
-    public ImageIcon image;
+
+    public boolean canCastle = true;
+
+    public Castle castlingPair;
 
     public King(int row, int column, Color pieceColor, boolean isSelected) {
         super(row, column, pieceColor, isSelected);
@@ -37,26 +38,35 @@ public class King extends GamePiece {
             column = coordinate[1];
             if (row >= 0 && row <= 7 && column > -1 && column <= 7)
             {
-            		if(Chess.chessBoard[row][column] == 0){
-            			possibleMoves.add(coordinate);
-            		}
-            		else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
-            			possibleMoves.add(coordinate);
-            		}
-            		else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
-            			possibleMoves.add(coordinate);
-            		}
+                if(Chess.chessBoard[row][column] == 0){
+                    possibleMoves.add(coordinate);
+                }
+                else if(pieceColor == Color.Black && Chess.chessBoard[row][column] == -1){
+                    possibleMoves.add(coordinate);
+                }
+                else if(pieceColor == Color.Red && Chess.chessBoard[row][column] == 1){
+                    possibleMoves.add(coordinate);
+                }
             }
         }
+
+        if (canCastle && castlingPair.canCastle) {
+            if (pieceColor == GamePiece.Color.Black) {
+                if (Chess.chessBoard[7][5] == 0 && Chess.chessBoard[7][6] == 0) {
+                    possibleMoves.add(new int[] {7, 6});
+                }
+            }
+
+            if (pieceColor == GamePiece.Color.Red) {
+                if (Chess.chessBoard[0][5] == 0 && Chess.chessBoard[0][6] == 0) {
+                    possibleMoves.add(new int[] {0, 6});
+                }
+            }
+        }
+
         return possibleMoves;
     }
 
-    public int getBMoves(){
-        return bMoves;
-    }
-    public int getRMoves(){
-        return rMoves;
-    }
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
         ArrayList<GamePiece> temp = new ArrayList<>();
@@ -75,13 +85,16 @@ public class King extends GamePiece {
             Chess.chessBoard[row][column] = -1;
         }
 
+        if (Math.abs(column - this.column) == 2) {
+            castlingPair.column = 5;
+
+            castlingPair.canCastle = false;
+            canCastle = false;
+        }
+
         this.row = row;
         this.column = column;
 
-        if(this.pieceColor == Color.Black){
-            bMoves++;
-        }else if(this.pieceColor == Color.Red){
-            rMoves++;
-        }
+        canCastle = false;
     }
 }

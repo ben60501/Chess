@@ -64,7 +64,6 @@ public class Chess extends JPanel {
 
         blackKing.castlingPair = (Castle) pieces.get(7);
         whiteKing.castlingPair = (Castle) pieces.get(23);
-        System.out.println(pieces.get(23));
 
     }
 
@@ -187,8 +186,20 @@ public class Chess extends JPanel {
 
     private void replacePawnWithQueen(GamePiece pawn) {
         GamePiece queen = new Queen(pawn.getRow(), pawn.getColumn(), pawn.getPieceColor(), pawn.isSelected());
-        pieces.add(queen);
-        pieces.remove(pawn);
+
+        ArrayList<GamePiece> temp = new ArrayList<>();
+
+        for (GamePiece piece: pieces) {
+            if (!(piece.getRow() == pawn.getRow() && piece.getColumn() == pawn.getColumn() && piece.getPieceColor() == pawn.getPieceColor())) {
+                temp.add(piece);
+            }
+        }
+
+        temp.add(queen);
+        pieces = temp;
+
+        repaint();
+
     }
 
 
@@ -240,10 +251,12 @@ public class Chess extends JPanel {
             int x = e.getX();
             int y = e.getY();
 
+            //Determines the row and column by using integer math (rounding down from decimals)
             int currentSelectedRow = y / 100;
             int currentSelectedColumn = x / 100;
 
             if (isSelected) {
+                //If
                 if (turn == GamePiece.Color.Black && chessBoard[currentSelectedRow][currentSelectedColumn] == 1) {
                     selectedRow = currentSelectedRow;
                     selectedColumn = currentSelectedColumn;

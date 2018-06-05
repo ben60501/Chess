@@ -67,6 +67,7 @@ public class King extends GamePiece {
         return possibleMoves;
     }
 
+    //Moves to selected
     public void moveToCoordinate(int row, int column) {
         Chess.chessBoard[this.row][this.column] = 0;
         ArrayList<GamePiece> temp = new ArrayList<>();
